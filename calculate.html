@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="app">
+        <div class="container">
+
+            <h1>{{ title }}</h1>
+            <input type="number" v-model="result">
+            
+            <div class="input-fields">
+                <input type="button" value="1" @click="appendToresult('1')">
+                <input type="button" value="2" @click="appendToresult('2')">
+                <input type="button" value="3" @click="appendToresult('3')">
+                <input type="button" value="+" @click="appendToresult('+')">
+            </div>
+            <div class="input-fields">
+                <input type="button" value="4" @click="appendToresult('4')">
+                <input type="button" value="5" @click="appendToresult('5')">
+                <input type="button" value="6" @click="appendToresult('6')">
+                <input type="button" value="-" @click="appendToresult('-')">
+            </div>
+            <div class="input-fields">
+                <input type="button" value="7" @click="appendToresult('7')">
+                <input type="button" value="8" @click="appendToresult('8')">
+                <input type="button" value="9" @click="appendToresult('9')">
+                <input type="button" value="*" @click="appendToresult('*')">
+            </div>
+            <div class="input-fields">
+                <input type="button" value="/" @click="appendToresult('/')">
+                <input type="button" value="0" @click="appendToresult('0')">
+                <input type="button" value="." @click="appendToresult('.')">
+                <input type="button" value="AC" @click="clear()">
+            </div>
+            
+            <input type="button" id="equals" value="=" @click="calculateResult()">
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        let app = Vue.createApp({
+            
+            data: function (){
+                return {
+                    title: 'Calculator App',
+                    result: ''
+                }
+            },
+            methods: {
+                appendToresult(value) {
+                    this.result += value;
+                },
+                calculateResult() {
+                    try {
+                        this.result = eval(this.result);
+                    } catch (error) {
+                        this.result = 'Error';
+                    }
+                },
+                clear() {
+                    this.result = '';
+                }
+            }
+        });
+        app.mount('#app')
+    </script>
+</body>
+
+</html>
